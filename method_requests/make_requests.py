@@ -5,6 +5,15 @@ from method_requests.put import request_put, request_put_with_headers
 
 
 def make_request(url, mode, params, body, headers):
+    """
+    Performs a request according to the method passed by the argument mode
+    :param url: string
+    :param mode: string
+    :param params: string
+    :param body: string
+    :param headers: string
+    :return: void
+    """
     if mode.lower() == 'post':
         if len(body) == 0:
             raise Exception("--body param it's required for post, put and delete methods")
