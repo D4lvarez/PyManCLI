@@ -2,6 +2,8 @@ import click
 import requests
 import json
 
+# TODO: Refactor code
+
 
 def make_request(url, mode, params, body, headers):
     if mode.lower() == 'post':
