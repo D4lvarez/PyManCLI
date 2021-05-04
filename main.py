@@ -4,6 +4,7 @@ import json
 
 # TODO: Refactor code
 from method_requests.get import request_get, request_get_with_params
+from method_requests.post import request_post_with_headers, request_post
 
 
 def make_request(url, mode, params, body, headers):
@@ -11,26 +12,8 @@ def make_request(url, mode, params, body, headers):
         if len(body) == 0:
             raise Exception("--body param it's required for post, put and delete methods")
         if len(headers) != 0:
-            try:
-                response = requests.post(url, data=json.loads(body.lower()), headers=eval(headers))
-                print(f"The request was to: {url}")
-                print(f"Request Headers: \n {response.request.headers}")
-                print(f"Status Code: {response.status_code}")
-                print(f"Response Body: \n {json.dumps(response.json(), indent=4)}")
-                print(f"Params: {response.url}")
-                return
-            except requests.exceptions.RequestException as e:
-                raise e
-        try:
-            response = requests.post(url, data=json.loads(body))
-            print(f"The request was to: {url}")
-            print(f"Status Code: {response.status_code}")
-            print(f"Response Body: \n {json.dumps(response.json(), indent=4)}")
-            print(f"Params: {response.url}")
-            return
-        except requests.exceptions.RequestException as e:
-            raise e
-
+            request_post_with_headers(url, body, headers)
+        request_post(url, body)
     elif mode.lower() == 'delete':
         if len(headers) != 0:
             try:
