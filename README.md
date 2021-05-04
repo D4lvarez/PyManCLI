@@ -57,7 +57,7 @@ The execution would look like this: ```python main.py --url http://localhost:800
 
 ## License
 
-AGL
+AGPL
 
 **Free Software, Hell Yeah!**
 __The name is just Py (python) Man (Postman) CLI (CLI). Saturday night ideas__
