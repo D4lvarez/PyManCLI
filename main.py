@@ -3,6 +3,7 @@ import requests
 import json
 
 # TODO: Refactor code
+from method_requests.get import request_get, request_get_with_params
 
 
 def make_request(url, mode, params, body, headers):
@@ -76,23 +77,8 @@ def make_request(url, mode, params, body, headers):
 
     elif mode.lower() == 'get':
         if len(params) != 0:
-            try:
-                response = requests.get(url, params=json.loads(params))
-                print(f"The request was to: {url}")
-                print(f"Status Code: {response.status_code}")
-                print(f"Response Body: \n {json.dumps(response.json(), indent=4)}")
-                print(f"Params: {response.url}")
-                return
-            except requests.exceptions.RequestException as e:
-                raise e
-        try:
-            response = requests.get(url)
-            print(f"The request was to: {url}")
-            print(f"Status Code: {response.status_code}")
-            print(f"Response Body: \n {json.dumps(response.json(), indent=4)}")
-            return
-        except requests.exceptions.RequestException as e:
-            raise e
+            request_get_with_params(url, params)
+        request_get(url)
     else:
         raise Exception("This method its not allowed")
 
